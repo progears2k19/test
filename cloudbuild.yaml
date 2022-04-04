@@ -1,0 +1,39 @@
+steps:
+- id: 'Create dir and files'
+  name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  volumes:
+    - name: "vol"
+      path: "/ficherovolumen"
+  entrypoint: '/bin/sh'
+  args:
+    - '-c'
+    - |
+      ls -lh
+      pwd
+      echo "Default dir" > default-dir.txt
+      ls -lh
+      mkdir fichero/
+      echo "Relative dir" > fichero/relative-dir.txt
+      ls -lh fichero/
+      mkdir /fichero
+      echo "Absolute dir" > /fichero/absolute-dir.txt
+      ls -lh /fichero
+      echo "Volume dir" > /ficherovolumen/volume-dir.txt
+      ls -lh /ficherovolumen
+- id: 'Check persistance'
+  name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  volumes:
+    - name: "vol"
+      path: "/ficherovolumen"
+  entrypoint: '/bin/sh'
+  args:
+    - '-c'
+    - |
+      ls -lh
+      cat default-dir.txt
+      ls -lh fichero/
+      cat fichero/relative-dir.txt
+      ls -lh /fichero
+      cat /fichero/absolute-dir.txt
+      ls -lh /ficherovolumen
+      cat /ficherovolumen/volume-dir.txt
