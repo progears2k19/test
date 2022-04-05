@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-master
+spec:
+  selector:
+    matchLabels:
+      app: test-master
+      version: v1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: test-master
+        version: v1
+    spec:
+      containers:
+      - name: test-master-hello
+        image: europe-west1-docker.pkg.dev/cicd-346222/my-repo/quickstart-image:tag1
+        resources:
+          limits:
+            cpu: 1
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        livenessProbe:
+          httpGet:
+            path: /test
+            port: 5000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /test
+            port: 5000
+          initialDelaySeconds: 1
+          periodSeconds: 10
