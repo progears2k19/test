@@ -1,16 +1,16 @@
 steps:
-  - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', 'europe-west1-docker.pkg.dev/$PROJECT_ID/my-repo/quickstart-image:$COMMIT_SHA', '.' ]
-  images:
-  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/my-repo/quickstart-image:$COMMIT_SHA'
-  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
-    entrypoint: gcloud
-    args: 
-      [
-        "deploy", "releases", "create", "rel-${SHORT_SHA}",
-        "--delivery-pipeline", "csmd",
-        "--region", "europe-west1",
-        "--annotations", "commitId=${REVISION_ID}",
-        "--images", "cloud-deploy=europe-west1-docker.pkg.dev/$PROJECT_ID/my-repo/quickstart-image:$COMMIT_SHA",
-        "--skaffold-file=skaffold.yml"
-      ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'europe-west1-docker.pkg.dev/$PROJECT_ID/my-repo/quickstart-image:$COMMIT_SHA', '.' ]
+images:
+- 'europe-west1-docker.pkg.dev/$PROJECT_ID/my-repo/quickstart-image:$COMMIT_SHA'
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  entrypoint: gcloud
+  args: 
+    [
+      "deploy", "releases", "create", "rel-${SHORT_SHA}",
+      "--delivery-pipeline", "csmd",
+      "--region", "europe-west1",
+      "--annotations", "commitId=${REVISION_ID}",
+      "--images", "cloud-deploy=europe-west1-docker.pkg.dev/$PROJECT_ID/my-repo/quickstart-image:$COMMIT_SHA",
+      "--skaffold-file=skaffold.yml"
+    ]
