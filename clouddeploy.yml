@@ -18,7 +18,7 @@ apiVersion: deploy.cloud.google.com/v1
 kind: Target
 metadata:
   name: dev
-description: dev cluster
+description: dev-cluster
 gke:
   cluster: projects/cicd-346222/locations/europe-west1-b/clusters/test-cluster
 ---
@@ -27,7 +27,7 @@ apiVersion: deploy.cloud.google.com/v1
 kind: Target
 metadata:
   name: pre
-description: pre cluster
+description: pre-cluster
 gke:
   cluster: projects/cicd-346222/locations/europe-west1-b/clusters/test-cluster
 ---
@@ -36,7 +36,7 @@ apiVersion: deploy.cloud.google.com/v1
 kind: Target
 metadata:
   name: pro
-description: pro cluster
+description: pro-cluster
 requireApproval: true
 gke:
   cluster: projects/cicd-346222/locations/europe-west1-b/clusters/test-cluster
