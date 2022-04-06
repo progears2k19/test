@@ -12,5 +12,3 @@ steps:
         "--images", "cloud-deploy=europe-west1-docker.pkg.dev/$PROJECT_ID/my-repo/quickstart-image:$COMMIT_SHA",
         "--skaffold-file=skaffold.yml"
       ]
-images:
- - 'europe-west1-docker.pkg.dev/$PROJECT_ID/my-repo/quickstart-image:$COMMIT_SHA'
